@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: OnboardingAPI
+  version: 1.3.0
+  description: API for student management
+  contact:
+    email: hei.miranto.2@gmail.com
+servers:
+  - url: http://stdxxxxx.com
+tags:
+  - name: students
+    description: Everything about your Students
+paths:
+  /students:
+    get:
+      tags : 
+        - students
+      summary: Returns a list of student
+      description: Returns a list of student as an array
+      responses:
+        '200':
+          description: A student successfully returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Server Error
+    post:
+      tags :
+        - students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      summary: Creates a new student
+      description: Creates a new student
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Rakoto
+        birthdate:
+          type: string
+          format: date
+          example: 2001-02-01
